@@ -9,8 +9,8 @@ import (
 
 	"github.com/chzyer/readline"
 	"github.com/juju/ansiterm"
-	"github.com/spaceweasel/promptui/list"
-	"github.com/spaceweasel/promptui/screenbuf"
+	"github.com/mubashwer/promptui/list"
+	"github.com/mubashwer/promptui/screenbuf"
 )
 
 // MultiSelect represents a list of checkable items used to enable selections, they can be used as a
@@ -107,24 +107,27 @@ type MultiSelectKeys struct {
 // text/template syntax. Custom state, colors and background color are available for use inside
 // the templates and are documented inside the Variable section of the docs.
 //
-// Examples
+// # Examples
 //
 // text/templates use a special notation to display programmable content. Using the double bracket notation,
 // the value can be printed with specific helper functions. For example
 //
 // This displays the value given to the template as pure, unstylized text. Structs are transformed to string
 // with this notation.
-// 	'{{ . }}'
+//
+//	'{{ . }}'
 //
 // This displays the name property of the value colored in cyan
-// 	'{{ .Name | cyan }}'
+//
+//	'{{ .Name | cyan }}'
 //
 // This displays the label property of value colored in red with a cyan background-color
-// 	'{{ .Label | red | cyan }}'
+//
+//	'{{ .Label | red | cyan }}'
 //
 // See the doc of text/template for more info: https://golang.org/pkg/text/template/
 //
-// Notes
+// # Notes
 //
 // Setting any of these templates will remove the icons from the default templates. They must
 // be added back in each of their specific templates. The styles.go constants contains the default icons.
@@ -400,14 +403,6 @@ func (s *MultiSelect) innerRun(cursorPos, scroll int, top rune) ([]int, error) {
 		rl.Close()
 		return nil, err
 	}
-
-	items, idx := s.list.Items()
-	item := items[idx]
-
-	sb.Flush()
-
-	rl.Write([]byte(showCursor))
-	rl.Close()
 
 	s.Selected = make([]int, 0, len(s.selected))
 	for i := range s.selected {
