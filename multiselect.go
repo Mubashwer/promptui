@@ -404,8 +404,6 @@ func (s *MultiSelect) innerRun(cursorPos, scroll int, top rune) ([]int, error) {
 	items, idx := s.list.Items()
 	item := items[idx]
 
-	sb.Reset()
-	sb.Write(render(s.Templates.selected, item))
 	sb.Flush()
 
 	rl.Write([]byte(showCursor))
